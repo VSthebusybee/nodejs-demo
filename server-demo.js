@@ -12,6 +12,8 @@ const express=require('express');
 const server=express();
 const port=4000;
 
+server.use(express.json());
+
 const movies=[
     {
         year:"2002",
@@ -25,9 +27,16 @@ const movies=[
     }
 ]
 
+
 server.get('/',(req,res)=>{
     
-    res.send(movies);
+    res.json(movies);
+})
+
+server.post('/',(req,res)=>{
+    console.log(req.body);
+    movies.push(req.body);
+    res.send('movies added!!');
 })
 
 server.listen(port,() => {
